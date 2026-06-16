@@ -1,184 +1,149 @@
-# Отчет о предупреждениях
+Лабораторная работа №2
 
-**Студент:** Воронов Александр (номер: 7)  
-**Вариант:** 8  
-**Задание:** 23 (Факториал числа с использованием цикла while)  
-**Количество предупреждений:** 13  
+Студент: Воронов Александр (номер: 7)
+Вариант: 8
+Задание: 23 (Факториал числа с использованием цикла while)
+Количество предупреждений: 13(10 уникальных)
 
----
+Предупреждения -Wall
+1. Неиспользуемый параметр функции
 
-## Предупреждения -Wall
-
----
-
-1. Неиспользуемая переменная
-Строка: 24  
+Строка: 14
 Код:
-```c
+
+int unused_param_func(int n, int unused)
+
+Предупреждение:
+
+warning: unused parameter ‘unused’ [-Wunused-parameter]
+
+Объяснение:
+Параметр функции объявлен, но не используется внутри тела функции.
+
+2. Неиспользуемая переменная
+
+Строка: 24
+Код:
+
 int a = 5;
 
-Текст предупреждения:
+Предупреждение:
 
 warning: unused variable ‘a’ [-Wunused-variable]
 
 Объяснение:
-Переменная объявлена и инициализирована, но нигде не используется в программе.
+Переменная объявлена, но не используется.
 
-2. Отсутствие фигурных скобок / пустое тело if
+3. Неиспользуемая переменная (unused-but-set)
 
-Строка: 35
+Строка: 66
 Код:
 
-if (n < 0)
-    ;
+int arr2[5];
 
-Текст предупреждения:
+Предупреждение:
 
-warning: suggest braces around empty body in an ‘if’ statement [-Wempty-body]
+warning: variable ‘arr2’ set but not used [-Wunused-but-set-variable]
 
 Объяснение:
-Условный оператор содержит пустое тело, что может привести к ошибкам чтения кода.
+Массив изменяется, но его значение не используется.
 
-3. Сравнение знаковых и беззнаковых типов
+4. Неиспользуемая переменная
 
-Строка: 41
+Строка: 65
+Код:
+
+int idx = ch;
+
+Предупреждение:
+
+warning: unused variable ‘idx’ [-Wunused-variable]
+5. Неиспользуемая переменная (char subscript warning контекст)
+
+Строка: 67
+Код:
+
+arr2[ch] = 10;
+
+Предупреждение:
+
+warning: array subscript has type ‘char’ [-Wchar-subscripts]
+
+Объяснение:
+Индекс массива имеет тип char, что может приводить к некорректной адресации памяти.
+
+6. Пустое тело if
+
+Строка: 74
+Код:
+
+;
+
+Предупреждение:
+
+warning: suggest braces around empty body in an ‘if’ statement [-Wempty-body]
+7. Сравнение знаковых и беззнаковых типов
+
+Строка: 78
 Код:
 
 if (u > n)
 
-Текст предупреждения:
+Предупреждение:
 
 warning: comparison of integer expressions of different signedness [-Wsign-compare]
+8. Предупреждение о приоритетах операций
 
-Объяснение:
-Происходит сравнение unsigned и signed типов данных.
-
-4. Несоответствие знаковости указателей
-
-Строка: 47
+Строка: 100
 Код:
 
-char *p = &uc;
+int c = a + b << 1;
 
-Текст предупреждения:
+Предупреждение:
 
-warning: pointer targets in initialization differ in signedness [-Wpointer-sign]
+warning: suggest parentheses around ‘+’ inside ‘<<’ [-Wparentheses]
+9. Неиспользуемая переменная
 
-Объяснение:
-Указатель типа char* получает адрес unsigned char*.
-
-5. Несоответствие формата вывода
-
-Строка: 61
+Строка: 113
 Код:
 
-printf("Факториал %d = %llu\n", n, factorial(n));
+int crash = 10 / zero;
 
-Текст предупреждения:
+Предупреждение:
 
-warning: format ‘%llu’ expects argument of type ‘long long unsigned int’, but argument has type ‘int’ [-Wformat=]
+warning: unused variable ‘crash’ [-Wunused-variable]
+10. Подозрительная индентация (misleading indentation)
 
-Объяснение:
-Тип возвращаемого значения функции не соответствует формату вывода.
-
-6. Неиспользуемая переменная
-
-Строка: 59
+Строка: 117
 Код:
 
-int size = sizeof(*ptr + 1);
+if (n > 0)
+    printf("OK\n");
+    printf("always\n");
 
-Текст предупреждения:
+Предупреждение:
 
-warning: unused variable ‘size’ [-Wunused-variable]
-
-Объяснение:
-Переменная объявлена, но не используется.
-
-7. Неиспользуемая переменная
-
-Строка: 55
-Код:
-
-int y = 5 + 3 * 2;
-
-Текст предупреждения:
-
-warning: unused variable ‘y’ [-Wunused-variable]
-
-Объяснение:
-Переменная вычисляется, но не используется.
-
-8. Неиспользуемая переменная (указатель)
-
-Строка: 47
-Код:
-
-char *p = &uc;
-
-Текст предупреждения:
-
-warning: unused variable ‘p’ [-Wunused-variable]
-
-Объяснение:
-Указатель объявлен, но не используется.
-
-9. Неиспользуемый массив
-
-Строка: 43
-Код:
-
-char arr[10];
-
-Текст предупреждения:
-
-warning: variable ‘arr’ set but not used [-Wunused-but-set-variable]
-
-Объяснение:
-Массив изменяется, но не используется в дальнейшем.
-
-10. Неиспользуемая переменная
-
-Строка: 37
-Код:
-
-int x;
-
-Текст предупреждения:
-
-warning: unused variable ‘x’ [-Wunused-variable]
-
-Объяснение:
-Переменная объявлена, но не используется.
-
+warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
 11. Неиспользуемая переменная
 
-Строка: 29
+Строка: 104
 Код:
 
-unsigned long long result = 1;
+int bad_size = sizeof(ptr + 1);
 
-Текст предупреждения:
+Предупреждение:
 
-warning: variable ‘result’ set but not used [-Wunused-but-set-variable]
+warning: unused variable ‘bad_size’ [-Wunused-variable]
+12. Неиспользуемая переменная
 
-Объяснение:
-Переменная присваивается, но не используется.
-
-12. Отсутствие return в функции
-
-Строка: 25
+Строка: 91
 Код:
 
-int no_return_function() { }
+int size = sizeof(x);
 
-Текст предупреждения:
+Предупреждение:
 
-warning: control reaches end of non-void function [-Wreturn-type]
-
-Объяснение:
-Функция объявлена как возвращающая int, но return отсутствует.
-
+warning: unused variable ‘size’ [-Wunused-variable]
 13. Неиспользуемая функция
 
 Строка: 11
@@ -186,9 +151,6 @@ warning: control reaches end of non-void function [-Wreturn-type]
 
 static void unused_func() {}
 
-Текст предупреждения:
+Предупреждение:
 
 warning: ‘unused_func’ defined but not used [-Wunused-function]
-
-Объяснение:
-Функция определена, но ни разу не вызывается в программе.
